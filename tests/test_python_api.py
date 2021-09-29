@@ -20,7 +20,7 @@ class TestApiUsage(unittest.TestCase):
         returned_filename = stl_to_h5m(
             files_with_tags=[
                 {
-                    "stl_filename": "part2.stl",
+                    "stl_filename": "tests/part2.stl",
                     "material_tag": "mat1",
                 }
             ],
@@ -45,7 +45,7 @@ class TestApiUsage(unittest.TestCase):
         returned_filename = stl_to_h5m(
             files_with_tags=[
                 {
-                    "stl_filename": "part1.stl",
+                    "stl_filename": "tests/part1.stl",
                     "material_tag": "mat1",
                 }
             ],
@@ -69,11 +69,11 @@ class TestApiUsage(unittest.TestCase):
         returned_filename = stl_to_h5m(
             files_with_tags=[
                 {
-                    "stl_filename": "part1.stl",
+                    "stl_filename": "tests/part1.stl",
                     "material_tag": "mat1",
                 },
                 {
-                    "stl_filename": "part2.stl",
+                    "stl_filename": "tests/part2.stl",
                     "material_tag": "mat2",
                 }
             ],
