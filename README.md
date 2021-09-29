@@ -1,3 +1,6 @@
+[![CI with install](https://github.com/fusion-energy/stl_to_h5m/actions/workflows/ci_with_install.yml/badge.svg)](https://github.com/fusion-energy/stl_to_h5m/actions/workflows/ci_with_install.yml)
+
+
 
 This is a minimal Python package that provides a Python API interfaces for converting multiple STL files into a DAGMC h5m file ready for use in simulation.
 
@@ -8,10 +11,10 @@ requires that the STL files do not overlap. Overlaps could lead to particles
 being lost during transport. If imprinting and merging is required consider
 using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m)
 
-# Installation - Conda
+~~# Installation - Conda~~
 
 ```bash
-conda install -c conda-forge stl_to_h5m
+~~conda install -c conda-forge stl_to_h5m~~
 ```
 
 # Installation - Pip + Conda
