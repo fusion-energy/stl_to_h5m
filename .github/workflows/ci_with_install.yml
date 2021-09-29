@@ -22,6 +22,7 @@ jobs:
       
       - name: install package
         run: |
+          pip install -r requirements-test.txt
           conda install -c conda-forge moab
           python setup.py install
 

@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Dict, List, TypedDict, Optional
 import numpy as np
 
+
 class FilesWithTags(TypedDict):
     stl_filename: str
     material_tag: str
@@ -38,7 +39,7 @@ def stl_to_h5m(
 
     if path_filename.suffix != ".h5m":
         raise ValueError('The h5m filename must end with ".h5m"')
-    
+
     path_filename.parents[0].mkdir(parents=True, exist_ok=True)
 
     moab_core, moab_tags = _define_moab_core_and_tags()
@@ -70,6 +71,7 @@ def stl_to_h5m(
     moab_core.write_file(str(path_filename))
 
     return str(path_filename)
+
 
 def _define_moab_core_and_tags():
     """Creates a MOAB Core instance which can be built up by adding sets of
