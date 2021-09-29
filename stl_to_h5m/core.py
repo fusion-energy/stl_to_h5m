@@ -1,7 +1,8 @@
 
 from pymoab import core, types
 from pathlib import Path
-
+from typing import Dict, List, TypedDict, Optional
+import numpy as np
 
 class FilesWithTags(TypedDict):
     stl_filename: str
@@ -45,7 +46,9 @@ def stl_to_h5m(
     surface_id = 1
     volume_id = 1
 
-    for stl_filename, material_tag in files_with_tags.items():
+    for entry in files_with_tags:
+        stl_filename = entry['stl_filename']
+        material_tag = entry['material_tag']
 
         moab_core = _add_stl_to_moab_core(
             moab_core,
