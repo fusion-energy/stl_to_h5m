@@ -11,16 +11,18 @@ requires that the STL files do not overlap. Overlaps could lead to particles
 being lost during transport. If imprinting and merging is required consider
 using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m)
 
-~~# Installation - Conda~~
+<!-- 
+# Installation - Conda
 
-~~```bash
+```bash
 conda install -c conda-forge stl_to_h5m
-```~~
+```
+-->
 
 # Installation - Pip + Conda
 
 ```bash
-conda install -c conda-forge pymoab
+conda install -c conda-forge moab
 pip install stl_to_h5m
 ```
 
