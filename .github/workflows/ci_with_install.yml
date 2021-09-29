@@ -1,0 +1,30 @@
+
+# This CI will launch a Docker image that contains all the dependencies required
+# within that image the pytest test suite is run 
+
+
+name: CI with install
+
+on:
+  pull_request:    
+    branches:
+    - develop
+    - main
+ 
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container:
+      image: continuumio/miniconda3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: install package
+        run: |
+          conda install -c conda-forge moab
+          python setup.py install
+
+      - name: Run test_utils
+        run: |
+          pytest tests/test_python_api.py -v 
