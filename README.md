@@ -13,9 +13,9 @@ using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m)
 
 ~~# Installation - Conda~~
 
-```bash
-~~conda install -c conda-forge stl_to_h5m~~
-```
+~~```bash
+conda install -c conda-forge stl_to_h5m
+```~~
 
 # Installation - Pip + Conda
 
