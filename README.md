@@ -1,2 +1,57 @@
-# stl_to_h5m
+
+This is a minimal Python package that provides a Python API interfaces for converting multiple STL files into a DAGMC h5m file ready for use in simulation.
+
 Convert STL files to a DAGMC h5m file complete with material tags and ready for use neutronics simulations.
+
+**warning** this approach does not imprint and merge the geometry and therefore
+requires that the STL files do not overlap. Overlaps could lead to particles
+being lost during transport. If imprinting and merging is required consider
+using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m)
+
+# Installation - Conda
+
+```bash
+conda install -c conda-forge stl_to_h5m
+```
+
+# Installation - Pip + Conda
+
+```bash
+conda install -c conda-forge pymoab
+pip install stl_to_h5m
+```
+
+# Usage - single file
+
+To convert a single STL file into a h5m file. This also tags the volume with the
+material tag m1.
+
+```python
+from stl_to_h5m import stl_to_h5m
+
+stl_to_h5m(
+    files_with_tags=[{'stl_filename':'part1.stl', 'material_tag':'m1'}],
+    h5m_filename='dagmc.h5m',
+)
+```
+
+# Usage - multiple files
+
+To convert multiple STL files into a h5m file. This also tags the relevant 
+volumes with material tags called m1 and m2.
+
+```python
+from stl_to_h5m import stl_to_h5m
+
+stl_to_h5m(
+    files_with_tags=[
+        {'stl_filename':'part1.stl', 'material_tag':'m1'},
+        {'stl_filename':'part2.stl', 'material_tag':'m2'}
+    ],
+    h5m_filename='dagmc.h5m'
+)
+```
+
+# Acknowledgments
+
+This package is largely based on [a script](https://gist.github.com/pshriwise/52452c37d4b7dd89bdc9374e13c35157) by @pshriwise
