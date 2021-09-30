@@ -9,7 +9,10 @@ Convert STL files to a DAGMC h5m file complete with material tags and ready for 
 **warning** this approach does not imprint and merge the geometry and therefore
 requires that the STL files do not overlap. Overlaps could lead to particles
 being lost during transport. If imprinting and merging is required consider
-using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m)
+using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m).
+
+It is strongly advised to used the DAGMC overlap checker to check the
+resulting h5m file (see checking for overlaps secton below).
 
 <!-- 
 # Installation - Conda
@@ -55,6 +58,16 @@ stl_to_h5m(
     ],
     h5m_filename='dagmc.h5m'
 )
+```
+
+# Usage - checking for overlaps
+
+To check for overlaps in the resulting h5m file one can use the DAGMC
+overlap checker. -p is the number of points to check on each line
+
+```bash
+conda install -c conda-forge
+overlap_check dagmc.h5m -p 1000
 ```
 
 # Acknowledgments
