@@ -1,11 +1,11 @@
 from pymoab import core, types
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, List
 import numpy as np
 
 
 def stl_to_h5m(
-    files_with_tags: Tuple[Tuple[str:str]],
+    files_with_tags: List[Tuple[str, str]],
     h5m_filename: str = "dagmc.h5m",
 ) -> str:
     """Converts stl files into DAGMC compatible h5m file using PyMOAB. The
@@ -18,8 +18,8 @@ def stl_to_h5m(
 
     Arguments:
         files_with_tags: The filenames of the input STL files with associated
-            materials tags in the form of a tuple of tuples. For example
-            (("file1.stl", "material_tag_1"), ("file2.stl", "material_tag_2")).
+            materials tags in the form of a list of tuples. For example
+            [("file1.stl", "material_tag_1"), ("file2.stl", "material_tag_2")].
         h5m_filename: the file name of the output h5m file which is suitable for
             use in DAGMC enabled particle transport codes.
 

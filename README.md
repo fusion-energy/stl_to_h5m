@@ -38,7 +38,7 @@ material tag m1.
 from stl_to_h5m import stl_to_h5m
 
 stl_to_h5m(
-    files_with_tags=[{'stl_filename':'part1.stl', 'material_tag':'m1'}],
+    files_with_tags=[('part1.stl', 'mat1')],
     h5m_filename='dagmc.h5m',
 )
 ```
@@ -53,8 +53,8 @@ from stl_to_h5m import stl_to_h5m
 
 stl_to_h5m(
     files_with_tags=[
-        {'stl_filename':'part1.stl', 'material_tag':'m1'},
-        {'stl_filename':'part2.stl', 'material_tag':'m2'}
+        ('part1.stl', 'mat1'),
+        ('part2.stl', 'mat2')
     ],
     h5m_filename='dagmc.h5m'
 )
