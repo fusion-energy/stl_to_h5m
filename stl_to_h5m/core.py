@@ -1,4 +1,3 @@
-
 from pymoab import core, types
 from pathlib import Path
 from typing import Tuple
@@ -45,12 +44,7 @@ def stl_to_h5m(
         material_tag = entry[1]
 
         moab_core = _add_stl_to_moab_core(
-            moab_core,
-            surface_id,
-            volume_id,
-            material_tag,
-            moab_tags,
-            stl_filename
+            moab_core, surface_id, volume_id, material_tag, moab_tags, stl_filename
         )
         volume_id += 1
         surface_id += 1
@@ -82,48 +76,52 @@ def _define_moab_core_and_tags() -> Tuple[core.Core, dict]:
 
     sense_tag_name = "GEOM_SENSE_2"
     sense_tag_size = 2
-    tags['surf_sense'] = moab_core.tag_get_handle(
+    tags["surf_sense"] = moab_core.tag_get_handle(
         sense_tag_name,
         sense_tag_size,
         types.MB_TYPE_HANDLE,
         types.MB_TAG_SPARSE,
-        create_if_missing=True)
+        create_if_missing=True,
+    )
 
-    tags['category'] = moab_core.tag_get_handle(
+    tags["category"] = moab_core.tag_get_handle(
         types.CATEGORY_TAG_NAME,
         types.CATEGORY_TAG_SIZE,
         types.MB_TYPE_OPAQUE,
         types.MB_TAG_SPARSE,
-        create_if_missing=True)
+        create_if_missing=True,
+    )
 
-    tags['name'] = moab_core.tag_get_handle(
+    tags["name"] = moab_core.tag_get_handle(
         types.NAME_TAG_NAME,
         types.NAME_TAG_SIZE,
         types.MB_TYPE_OPAQUE,
         types.MB_TAG_SPARSE,
-        create_if_missing=True)
+        create_if_missing=True,
+    )
 
-    tags['geom_dimension'] = moab_core.tag_get_handle(
+    tags["geom_dimension"] = moab_core.tag_get_handle(
         types.GEOM_DIMENSION_TAG_NAME,
         1,
         types.MB_TYPE_INTEGER,
         types.MB_TAG_DENSE,
-        create_if_missing=True)
+        create_if_missing=True,
+    )
 
     # Global ID is a default tag, just need the name to retrieve
-    tags['global_id'] = moab_core.tag_get_handle(types.GLOBAL_ID_TAG_NAME)
+    tags["global_id"] = moab_core.tag_get_handle(types.GLOBAL_ID_TAG_NAME)
 
     return moab_core, tags
 
 
 def _add_stl_to_moab_core(
-        moab_core: core.Core,
-        surface_id: int,
-        volume_id: int,
-        material_name: str,
-        tags: dict,
-        stl_filename: str
-    ) -> core.Core:
+    moab_core: core.Core,
+    surface_id: int,
+    volume_id: int,
+    material_name: str,
+    tags: dict,
+    stl_filename: str,
+) -> core.Core:
     """Computes the m and c coefficients of the equation (y=mx+c) for
     a straight line from two points.
 
@@ -146,43 +144,39 @@ def _add_stl_to_moab_core(
 
     # recent versions of MOAB handle this automatically
     # but best to go ahead and do it manually
-    moab_core.tag_set_data(tags['global_id'], volume_set, volume_id)
+    moab_core.tag_set_data(tags["global_id"], volume_set, volume_id)
 
-    moab_core.tag_set_data(tags['global_id'], surface_set, surface_id)
+    moab_core.tag_set_data(tags["global_id"], surface_set, surface_id)
 
     # set geom IDs
-    moab_core.tag_set_data(tags['geom_dimension'], volume_set, 3)
-    moab_core.tag_set_data(tags['geom_dimension'], surface_set, 2)
+    moab_core.tag_set_data(tags["geom_dimension"], volume_set, 3)
+    moab_core.tag_set_data(tags["geom_dimension"], surface_set, 2)
 
     # set category tag values
-    moab_core.tag_set_data(tags['category'], volume_set, "Volume")
-    moab_core.tag_set_data(tags['category'], surface_set, "Surface")
+    moab_core.tag_set_data(tags["category"], volume_set, "Volume")
+    moab_core.tag_set_data(tags["category"], surface_set, "Surface")
 
     # establish parent-child relationship
     moab_core.add_parent_child(volume_set, surface_set)
 
     # set surface sense
     sense_data = [volume_set, np.uint64(0)]
-    moab_core.tag_set_data(tags['surf_sense'], surface_set, sense_data)
+    moab_core.tag_set_data(tags["surf_sense"], surface_set, sense_data)
 
     # load the stl triangles/vertices into the surface set
     moab_core.load_file(stl_filename, surface_set)
 
     group_set = moab_core.create_meshset()
-    moab_core.tag_set_data(tags['category'], group_set, "Group")
+    moab_core.tag_set_data(tags["category"], group_set, "Group")
 
     # reflective is a special case that should not have mat: in front
-    if not material_name == 'reflective':
+    if not material_name == "reflective":
         dag_material_tag = "mat:{}".format(material_name)
     else:
         dag_material_tag = material_name
 
-    moab_core.tag_set_data(
-        tags['name'],
-        group_set,
-        dag_material_tag
-    )
-    moab_core.tag_set_data(tags['geom_dimension'], group_set, 4)
+    moab_core.tag_set_data(tags["name"], group_set, dag_material_tag)
+    moab_core.tag_set_data(tags["geom_dimension"], group_set, 4)
 
     # add the volume to this group set
     moab_core.add_entity(group_set, volume_set)
