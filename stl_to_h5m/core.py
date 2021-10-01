@@ -1,17 +1,12 @@
 
 from pymoab import core, types
 from pathlib import Path
-from typing import Dict, List, TypedDict, Optional
+from typing import Tuple
 import numpy as np
 
 
-class FilesWithTags(TypedDict):
-    stl_filename: str
-    material_tag: str
-
-
 def stl_to_h5m(
-    files_with_tags: FilesWithTags,
+    files_with_tags: Tuple[Tuple[str:str]],
     h5m_filename: str = "dagmc.h5m",
 ) -> str:
     """Converts stl files into DAGMC compatible h5m file using PyMOAB. The
@@ -23,11 +18,9 @@ def stl_to_h5m(
     required.
 
     Arguments:
-        files_with_tags: The file names of the input CAD files with associated
-            materials tags in the form of a list of dictionaries were each
-            dictionary has a "stl_filename" and "material_tag" key. For example
-            [{"material_tag": "mat1", "stl_filename": "part1.stl"},
-            {"material_tag": "mat2", "stl_filename": "part2.stl"}].
+        files_with_tags: The filenames of the input STL files with associated
+            materials tags in the form of a tuple of tuples. For example
+            (("file1.stl", "material_tag_1"), ("file2.stl", "material_tag_2")).
         h5m_filename: the file name of the output h5m file which is suitable for
             use in DAGMC enabled particle transport codes.
 
@@ -48,8 +41,8 @@ def stl_to_h5m(
     volume_id = 1
 
     for entry in files_with_tags:
-        stl_filename = entry['stl_filename']
-        material_tag = entry['material_tag']
+        stl_filename = entry[0]
+        material_tag = entry[1]
 
         moab_core = _add_stl_to_moab_core(
             moab_core,
@@ -73,9 +66,10 @@ def stl_to_h5m(
     return str(path_filename)
 
 
-def _define_moab_core_and_tags():
+def _define_moab_core_and_tags() -> Tuple[core.Core, dict]:
     """Creates a MOAB Core instance which can be built up by adding sets of
     triangles to the instance
+
     Returns:
         (pymoab Core): A pymoab.core.Core() instance
         (pymoab tag_handle): A pymoab.core.tag_get_handle() instance
@@ -128,9 +122,11 @@ def _add_stl_to_moab_core(
         volume_id: int,
         material_name: str,
         tags: dict,
-        stl_filename: str) -> core.Core:
+        stl_filename: str
+    ) -> core.Core:
     """Computes the m and c coefficients of the equation (y=mx+c) for
     a straight line from two points.
+
     Args:
         moab_core: A moab core object
         surface_id: the id number to apply to the surface
@@ -140,6 +136,7 @@ def _add_stl_to_moab_core(
             a special case and therefore will remain as is.
         tags: A dictionary of the MOAB tags
         stl_filename: the filename of the stl file to load into the moab core
+
     Returns:
         An updated pymoab.core.Core() instance
     """
