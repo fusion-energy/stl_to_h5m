@@ -66,7 +66,7 @@ To check for overlaps in the resulting h5m file one can use the DAGMC
 overlap checker. -p is the number of points to check on each line
 
 ```bash
-conda install -c conda-forge
+conda install -c conda-forge dagmc
 overlap_check dagmc.h5m -p 1000
 ```
 
