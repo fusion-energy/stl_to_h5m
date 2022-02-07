@@ -12,10 +12,9 @@ rm -rf /tmp/conda-build
 mkdir -p /tmp/conda-build
 rm -rf /tmp/conda-build
 
-conda-build conda/ -c cadquery -c conda-forge --croot /tmp/conda-build 
+conda-build conda/ -c conda-forge --croot /tmp/conda-build 
 
 # converting using all includes quite a few oxs and linux versions.
-# Several of which (arm arch etc) which are not all available for cadquery
 # conda convert /tmp/conda-build/linux-64/*.tar.bz2 --platform all  -o /tmp/conda-build
 
 # option for converting package to specified platforms
