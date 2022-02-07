@@ -19,7 +19,6 @@ conda-build conda/ -c cadquery -c conda-forge --croot /tmp/conda-build
 # conda convert /tmp/conda-build/linux-64/*.tar.bz2 --platform all  -o /tmp/conda-build
 
 # option for converting package to specified platforms
-# platforms=( osx-64 linux-64 win-64 ) windows does not have moab
 platforms=( osx-64 linux-64 win-64 )
 find /tmp/conda-build/linux-64/ -name *.tar.bz2 | while read file
 do
