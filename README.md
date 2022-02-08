@@ -14,15 +14,18 @@ using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m).
 It is strongly advised to used the DAGMC overlap checker to check the
 resulting h5m file (see checking for overlaps secton below).
 
-<!-- 
+
 # Installation - Conda
 
+This single line command should install the package and dependencies (including moab)
+
 ```bash
-conda install -c conda-forge stl_to_h5m
+conda install -c fusion-energy -c conda-forge stl_to_h5m
 ```
--->
 
 # Installation - Pip + Conda
+
+These two commands should install the package and dependencies. Moab requires a separate install as it is not available on ```pip```
 
 ```bash
 conda install -c conda-forge moab
