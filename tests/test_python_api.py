@@ -18,9 +18,7 @@ class TestApiUsage(unittest.TestCase):
         os.system(f"rm {test_h5m_filename}")
 
         returned_filename = stl_to_h5m(
-            files_with_tags=[
-                ("tests/part2.stl", "mat1")
-            ],
+            files_with_tags=[("tests/part2.stl", "mat1")],
             h5m_filename=test_h5m_filename,
         )
 
@@ -29,8 +27,7 @@ class TestApiUsage(unittest.TestCase):
         assert test_h5m_filename == returned_filename
         assert di.get_volumes_from_h5m(test_h5m_filename) == [1]
         assert di.get_materials_from_h5m(test_h5m_filename) == ["mat1"]
-        assert di.get_volumes_and_materials_from_h5m(
-            test_h5m_filename) == {1: "mat1"}
+        assert di.get_volumes_and_materials_from_h5m(test_h5m_filename) == {1: "mat1"}
 
     def test_h5m_file_creation_and_contents_in_subfolder(self):
         """Checks that a h5m file is created in a subfolder from a single stl
@@ -40,9 +37,7 @@ class TestApiUsage(unittest.TestCase):
         os.system(f"rm {test_h5m_filename}")
 
         returned_filename = stl_to_h5m(
-            files_with_tags=[
-                ("tests/part1.stl", "mat1")
-            ],
+            files_with_tags=[("tests/part1.stl", "mat1")],
             h5m_filename=test_h5m_filename,
         )
 
@@ -51,8 +46,7 @@ class TestApiUsage(unittest.TestCase):
         assert test_h5m_filename == returned_filename
         assert di.get_volumes_from_h5m(test_h5m_filename) == [1]
         assert di.get_materials_from_h5m(test_h5m_filename) == ["mat1"]
-        assert di.get_volumes_and_materials_from_h5m(
-            test_h5m_filename) == {1: "mat1"}
+        assert di.get_volumes_and_materials_from_h5m(test_h5m_filename) == {1: "mat1"}
 
     def test_h5m_file_creation_and_contents_from_multiple_h5m_files(self):
         """Checks that a h5m file is created from multiple stl files"""
@@ -61,10 +55,7 @@ class TestApiUsage(unittest.TestCase):
         os.system(f"rm {test_h5m_filename}")
 
         returned_filename = stl_to_h5m(
-            files_with_tags=[
-                ("tests/part1.stl", "mat1"),
-                ("tests/part2.stl", "mat2")
-            ],
+            files_with_tags=[("tests/part1.stl", "mat1"), ("tests/part2.stl", "mat2")],
             h5m_filename=test_h5m_filename,
         )
 

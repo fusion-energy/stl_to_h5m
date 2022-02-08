@@ -44,12 +44,8 @@ def stl_to_h5m(
         material_tag = entry[1]
 
         moab_core = _add_stl_to_moab_core(
-            moab_core,
-            surface_id,
-            volume_id,
-            material_tag,
-            moab_tags,
-            stl_filename)
+            moab_core, surface_id, volume_id, material_tag, moab_tags, stl_filename
+        )
         volume_id += 1
         surface_id += 1
 

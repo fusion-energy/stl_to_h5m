@@ -130,3 +130,6 @@ dmypy.json
 
 # dagmc files
 *.h5m
+
+# version file
+_version.py
