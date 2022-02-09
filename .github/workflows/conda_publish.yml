@@ -1,0 +1,30 @@
+name: conda_build
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+  push:
+    branches: [ main ]
+    tags:
+      - '**'
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: publish-to-conda
+      uses: shimwell/conda-package-publish-action@main
+      with:
+        subDir: 'conda'
+        channels: '-c fusion-energy -c conda-forge'
+        AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
+        publish: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') }}
+        test_all: ${{(github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')) || (github.ref == 'refs/heads/main')}}
+        convert_win: true
+        convert_osx: true
