@@ -1,4 +1,4 @@
-name: conda_build
+name: anaconda-publish
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: publish-to-conda
-      uses: shimwell/conda-package-publish-action@main
+      uses: shimwell/anaconda-publish@main
       with:
         subDir: 'conda'
         channels: '-c fusion-energy -c conda-forge'
