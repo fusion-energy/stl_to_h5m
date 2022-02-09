@@ -1,5 +1,5 @@
 {% set name = "stl_to_h5m" %}
-{% set version = "0.0.3" %}
+# {% set version = "0.0.3" %}
 
 package:
   name: "{{ name|lower }}"
