@@ -4,14 +4,6 @@ on:
   workflow_dispatch:
   release:
     types: [published]
-  push:
-    branches: [ main ]
-    tags:
-      - '**'
-  pull_request:
-    branches:
-      - develop
-      - main
 
 jobs:
   build:
@@ -24,8 +16,7 @@ jobs:
         subDir: 'conda'
         channels: '-c fusion-energy -c conda-forge'
         AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
-        # publish: true
-        publish: ${{ github.event_name == 'release' }}
-        test_all: ${{(github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')) || (github.ref == 'refs/heads/main')}}
+        publish: true
+        test_all: true
         convert_win: true
         convert_osx: true
