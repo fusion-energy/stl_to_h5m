@@ -3,7 +3,8 @@
 
 package:
   name: "{{ name|lower }}"
-  version: {{ version }}
+  # version: {{ version }}
+  version: {{ GIT_DESCRIBE_TAG }}
 
 source:
   path: ..
