@@ -24,7 +24,8 @@ jobs:
         subDir: 'conda'
         channels: '-c fusion-energy -c conda-forge'
         AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
-        publish: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') }}
+        # publish: true
+        publish: ${{ github.event_name == 'release' }}
         test_all: ${{(github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')) || (github.ref == 'refs/heads/main')}}
         convert_win: true
         convert_osx: true
