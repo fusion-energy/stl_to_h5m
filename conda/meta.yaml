@@ -26,11 +26,12 @@ test:
     - stl_to_h5m
   requires:
     - pytest
-  # source_files:
-  #   - tests/
-  #   - examples/
-  # commands:
-  #   - pytest tests
+    - dagmc_h5m_file_inspector
+  source_files:
+    - tests/
+    - examples/
+  commands:
+    - pytest tests
 
 
 about:
