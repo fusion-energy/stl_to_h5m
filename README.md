@@ -6,7 +6,8 @@
 [![Upload Python Package](https://github.com/fusion-energy/stl_to_h5m/actions/workflows/python-publish.yml/badge.svg)](https://github.com/fusion-energy/stl_to_h5m/actions/workflows/python-publish.yml)
 [![anaconda-publish](https://github.com/fusion-energy/stl_to_h5m/actions/workflows/anaconda-publish.yml/badge.svg)](https://github.com/fusion-energy/stl_to_h5m/actions/workflows/anaconda-publish.yml)
 
-
+[![conda-publish](https://anaconda.org/fusion-energy/stl_to_h5m/badges/version.svg)](https://anaconda.org/fusion-energy/stl_to_h5m)
+[![PyPI](https://img.shields.io/pypi/v/stl-to-h5m?color=brightgreen&label=pypi&logo=grebrightgreenen&logoColor=green)](https://pypi.org/project/stl_to_h5m/)
 
 This is a minimal Python package that provides a Python API interfaces for converting multiple STL files into a DAGMC h5m file ready for use in simulation.
 
@@ -15,10 +16,12 @@ Convert STL files to a DAGMC h5m file complete with material tags and ready for 
 **warning** this approach does not imprint and merge the geometry and therefore
 requires that the STL files do not overlap. Overlaps could lead to particles
 being lost during transport. If imprinting and merging is required consider
-using [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m).
+using [Paramak export_dagmc_h5m()](https://paramak.readthedocs.io/en/main/)
+method or [cad-to-h5m](https://github.com/fusion-energy/cad_to_h5m) to make the
+DAGMC geometry.
 
 It is strongly advised to used the DAGMC overlap checker to check the
-resulting h5m file (see checking for overlaps secton below).
+resulting h5m file (see checking for overlaps section below).
 
 
 # Installation - Conda
@@ -26,7 +29,7 @@ resulting h5m file (see checking for overlaps secton below).
 This single line command should install the package and dependencies (including moab)
 
 ```bash
-conda install -c fusion-energy -c conda-forge stl_to_h5m
+conda install -c fusion-energy -c fusion-energy stl_to_h5m
 ```
 
 # Installation - Pip + Conda

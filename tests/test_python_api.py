@@ -68,3 +68,21 @@ class TestApiUsage(unittest.TestCase):
             1: "mat1",
             2: "mat2",
         }
+
+    def test_tagnames_in_h5m_file(self):
+        """Checks that a h5m file is created with the correct tag names"""
+
+        test_h5m_filename = "test_dagmc.h5m"
+        os.system(f"rm {test_h5m_filename}")
+
+        returned_filename = stl_to_h5m(
+            files_with_tags=[("tests/part2.stl", "mat:mat1")],
+            h5m_filename=test_h5m_filename,
+        )
+
+        assert Path(test_h5m_filename).is_file()
+        assert Path(returned_filename).is_file()
+        assert test_h5m_filename == returned_filename
+        assert di.get_volumes_from_h5m(test_h5m_filename) == [1]
+        assert di.get_materials_from_h5m(test_h5m_filename) == ["mat1"]
+        assert di.get_volumes_and_materials_from_h5m(test_h5m_filename) == {1: "mat1"}

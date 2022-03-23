@@ -171,7 +171,10 @@ def _add_stl_to_moab_core(
 
     # reflective is a special case that should not have mat: in front
     if not material_name == "reflective":
-        dag_material_tag = "mat:{}".format(material_name)
+        if material_name.startswith('mat:'):
+            dag_material_tag = material_name
+        else:
+            dag_material_tag = "mat:{}".format(material_name)
     else:
         dag_material_tag = material_name
 
