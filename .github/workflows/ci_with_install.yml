@@ -22,12 +22,12 @@ jobs:
       
       - name: install package
         run: |
+          conda install -c conda-forge moab
           pip install .
           python -c "import stl_to_h5m"
 
       - name: install package with tests
         run: |
-          conda install -c conda-forge moab
           pip install .[tests]
 
       - name: Run test_utils
