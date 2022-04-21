@@ -10,9 +10,7 @@ source:
 
 build:
   number: 0
-  script:
-    - python3 -m pip install --upgrade build
-    - python3 -m build
+  script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
   build:
