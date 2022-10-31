@@ -16,7 +16,7 @@ requirements:
   build:
     - python {{ python }}
     - setuptools>=65.4.0
-    - setuptools_scm>=7.0.5
+    - setuptools_scm[toml]>=7.0.5
   run:
     - python
     - moab [not win]
